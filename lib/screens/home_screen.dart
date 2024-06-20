@@ -1,3 +1,4 @@
+import 'package:doctor_app/shared/widgets/titles/section_title.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -90,7 +91,7 @@ class HomeView extends StatelessWidget {
                       decoration:  BoxDecoration(
                         color:  colorScheme.onSurfaceVariant,
                       ),
-                      child: const Icon(Icons.filter_alt_outlined))
+                      child: const Icon(Icons.filter_alt_outlined, color: Colors.white,))
               ),
             ),
           ),
@@ -121,8 +122,13 @@ class _DoctorCategories extends StatelessWidget {
     return Column(
       children: [
         //Title
+        SectionTitle(
+          title: 'Categories',
+          action: 'See all',
+          onPressed: () {} ,
+        ),
 
-        //Icons
+        //Icons and labels
 
 
       ],
