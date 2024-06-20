@@ -1,3 +1,5 @@
+//This is customized theme for my application
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,6 +16,7 @@ class AppTheme {
     );
   }
 
+  // Apps Color scheme
   static ColorScheme get _colorScheme {
     return const ColorScheme(
       brightness: Brightness.light,
@@ -42,6 +45,7 @@ class AppTheme {
     );
   }
 
+  //Text theme
   static TextTheme get _textTheme {
     const textTheme = TextTheme();
 
@@ -76,6 +80,7 @@ class AppTheme {
     );
   }
 
+  //Button Theme
   static FilledButtonThemeData get _filledButtonTheme {
     return FilledButtonThemeData(
       style: FilledButton.styleFrom(
@@ -87,6 +92,7 @@ class AppTheme {
     );
   }
 
+  // Input Field Theme
   static InputBorder get _enabledBorder => OutlineInputBorder(
     borderRadius: BorderRadius.circular(8.0),
     borderSide: const BorderSide(color: Colors.transparent),

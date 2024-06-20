@@ -33,14 +33,14 @@ class HomeView extends StatelessWidget {
               'Welcome',
               style: textTheme.bodyMedium,
             ),
-            SizedBox(
+            const SizedBox(
               height: 4,
             ),
             Text(
               'Massimo D',
               style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold),
             ),
-            SizedBox(
+            const SizedBox(
               height: 4,
             ),
             Row(
@@ -72,7 +72,7 @@ class HomeView extends StatelessWidget {
             onPressed: () {},
             icon: const Icon (Icons.notifications_outlined),
           ),
-        const SizedBox(width: 8,),
+          const SizedBox(width: 8,),
         ],
 
         //Search bar
@@ -82,20 +82,50 @@ class HomeView extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             child: TextFormField(
               decoration: InputDecoration(
-                hintText: 'Search for a doctor . . .',
-                prefixIcon: Icon(Icons.search),
-                suffixIcon: Container(
-                    margin: EdgeInsets.all(4),
-                    padding: EdgeInsets.all(8),
-                    decoration:  BoxDecoration(
-                      color:  colorScheme.onSurfaceVariant,
-                    ),
-                    child: Icon(Icons.filter_alt_outlined))
+                  hintText: 'Search for a doctor . . .',
+                  prefixIcon: const Icon(Icons.search),
+                  suffixIcon: Container(
+                      margin: const EdgeInsets.all(4),
+                      padding: const EdgeInsets.all(8),
+                      decoration:  BoxDecoration(
+                        color:  colorScheme.onSurfaceVariant,
+                      ),
+                      child: const Icon(Icons.filter_alt_outlined))
               ),
             ),
           ),
         ),
       ),
+
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(8),
+        child: Column(
+          children: [
+            //We will Display all the doctors categories here
+            _DoctorCategories(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+//Doctor Categories class
+
+class _DoctorCategories extends StatelessWidget {
+  const _DoctorCategories({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        //Title
+
+        //Icons
+
+
+      ],
     );
   }
 }
