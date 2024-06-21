@@ -4,6 +4,9 @@ import 'package:doctor_app/shared/widgets/titles/section_title.dart';
 import 'package:flutter/material.dart';
 import 'package:models/models.dart';
 
+import '../shared/widgets/bottom_nav_bars/main_nav_bar.dart';
+import '../shared/widgets/list_tiles/doctor_list_tile.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -106,7 +109,7 @@ class HomeView extends StatelessWidget {
         ),
       ),
 
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         padding: EdgeInsets.all(8),
         child: Column(
           children: [
@@ -119,6 +122,7 @@ class HomeView extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar:const MainNavBar(),
     );
   }
 }
@@ -140,15 +144,16 @@ class _DoctorCategories extends StatelessWidget {
 
         //Icons and labels
         Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: DoctorCategory.values.take(5).map((category) =>
-                Expanded(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: DoctorCategory.values
+              .take(5)
+              .map(
+                (category) => Expanded(
                   child: CircleAvatarWithTextLabel(
-                      icon: category.icon,
-                      label: category.name
-                  ),
+                      icon: category.icon, label: category.name),
                 ),
-            ).toList(),
+              )
+              .toList(),
         ),
       ],
     );
@@ -170,7 +175,6 @@ class _MySchedule extends StatelessWidget {
           onPressed: () {},
         ),
         const AppointmentPreviewCard(),
-
       ],
     );
   }
@@ -181,6 +185,7 @@ class _NearbyDoctors extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       children: [
         SectionTitle(
@@ -188,7 +193,21 @@ class _NearbyDoctors extends StatelessWidget {
           action: 'See all',
           onPressed: () {},
         ),
-        
+        const SizedBox(
+          height: 8,
+        ),
+        ListView.separated(
+          physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            separatorBuilder: (context, index) {
+              return Divider(height: 24, color: colorScheme.surfaceVariant, );
+            },
+             itemCount: Doctor.sampleDoctors.length,
+            itemBuilder: (context, index) {
+            final doctor = Doctor.sampleDoctors[index];
+            return DoctorListTile(doctor: doctor);
+            },
+            )
       ],
     );
   }

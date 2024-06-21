@@ -22,6 +22,7 @@ dependencies:
   cloud_firestore: ^5.0.1
   models:
     path: packages/models
+  flutter_bloc: ^8.1.6
 
 dev_dependencies:
   flutter_test:
