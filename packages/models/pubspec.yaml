@@ -10,11 +10,18 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  equatable: ^2.0.5
+  google_maps_flutter: ^2.7.0
+  uuid: ^4.4.0
+  built_value: ^8.9.2
+  cloud_firestore: ^5.0.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
+  build_runner: ^2.4.11
+  built_value_generator: ^8.9.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

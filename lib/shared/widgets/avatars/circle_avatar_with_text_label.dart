@@ -33,9 +33,6 @@ class CircleAvatarWithTextLabel extends StatelessWidget {
             maxLines: 1,
             // Handling Text Overflow: if the text is too long then it will be replaced by dots from the end
             overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.bodySmall!.copyWith(
-              color: colorScheme.secondary,
-            ),
           ),
         ],
       ),

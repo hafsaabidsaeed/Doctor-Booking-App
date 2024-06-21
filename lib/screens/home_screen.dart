@@ -1,5 +1,8 @@
+import 'package:doctor_app/shared/widgets/avatars/circle_avatar_with_text_label.dart';
+import 'package:doctor_app/shared/widgets/cards/appointment_preview_card.dart';
 import 'package:doctor_app/shared/widgets/titles/section_title.dart';
 import 'package:flutter/material.dart';
+import 'package:models/models.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -55,7 +58,8 @@ class HomeView extends StatelessWidget {
                 ),
                 Text(
                   'Dubai, UAE',
-                  style: textTheme.bodySmall!.copyWith(color: colorScheme.secondary),
+                  style: textTheme.bodySmall!
+                      .copyWith(color: colorScheme.secondary),
                 ),
                 const SizedBox(
                   width: 4,
@@ -71,15 +75,17 @@ class HomeView extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon (Icons.notifications_outlined),
+            icon: const Icon(Icons.notifications_outlined),
           ),
-          const SizedBox(width: 8,),
+          const SizedBox(
+            width: 8,
+          ),
         ],
 
         //Search bar
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(64),
-          child:  Padding(
+          child: Padding(
             padding: const EdgeInsets.all(8),
             child: TextFormField(
               decoration: InputDecoration(
@@ -88,11 +94,13 @@ class HomeView extends StatelessWidget {
                   suffixIcon: Container(
                       margin: const EdgeInsets.all(4),
                       padding: const EdgeInsets.all(8),
-                      decoration:  BoxDecoration(
-                        color:  colorScheme.onSurfaceVariant,
+                      decoration: BoxDecoration(
+                        color: colorScheme.onSurfaceVariant,
                       ),
-                      child: const Icon(Icons.filter_alt_outlined, color: Colors.white,))
-              ),
+                      child: const Icon(
+                        Icons.filter_alt_outlined,
+                        color: Colors.white,
+                      ))),
             ),
           ),
         ),
@@ -104,6 +112,10 @@ class HomeView extends StatelessWidget {
           children: [
             //We will Display all the doctors categories here
             _DoctorCategories(),
+            SizedBox(height: 24,),
+            _MySchedule(),
+            SizedBox(height: 24,),
+            _NearbyDoctors(),
           ],
         ),
       ),
@@ -111,9 +123,7 @@ class HomeView extends StatelessWidget {
   }
 }
 
-
-//Doctor Categories class
-
+//Doctor Categories section of the home screen
 class _DoctorCategories extends StatelessWidget {
   const _DoctorCategories({super.key});
 
@@ -125,12 +135,60 @@ class _DoctorCategories extends StatelessWidget {
         SectionTitle(
           title: 'Categories',
           action: 'See all',
-          onPressed: () {} ,
+          onPressed: () {},
         ),
 
         //Icons and labels
+        Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: DoctorCategory.values.take(5).map((category) =>
+                Expanded(
+                  child: CircleAvatarWithTextLabel(
+                      icon: category.icon,
+                      label: category.name
+                  ),
+                ),
+            ).toList(),
+        ),
+      ],
+    );
+  }
+}
 
+//My schedule section of the home screen
+class _MySchedule extends StatelessWidget {
+  const _MySchedule({super.key});
 
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        //Title
+        SectionTitle(
+          title: 'My Schedule',
+          action: 'See all',
+          onPressed: () {},
+        ),
+        const AppointmentPreviewCard(),
+
+      ],
+    );
+  }
+}
+
+class _NearbyDoctors extends StatelessWidget {
+  const _NearbyDoctors({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SectionTitle(
+          title: 'Nearby Doctors',
+          action: 'See all',
+          onPressed: () {},
+        ),
+        
       ],
     );
   }
