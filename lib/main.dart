@@ -1,23 +1,44 @@
-
-import 'package:doctor_app/screens/home_screen.dart';
-import 'package:doctor_app/shared/theme/app_theme.dart';
+import 'package:doctor_app/state/home/_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'repositories/doctor_repository.dart';
+import 'screens/home_screen.dart';
+import 'shared/theme/app_theme.dart';
 
 void main() {
-  runApp(const MyApp());
+  final doctorRepository = DoctorRepository();
+  runApp(AppScreen(doctorRepository: doctorRepository));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class AppScreen extends StatelessWidget {
+  const AppScreen({
+    super.key,
+    required this.doctorRepository,
+  });
+
+  final DoctorRepository doctorRepository;
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Doctor Booking App',
-      theme: const AppTheme().themeData,
-      home: HomeScreen() ,
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider.value(value: doctorRepository),
+        // Create other instances of repositories to make available to the app
+      ],
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => HomeBloc(doctorRepository: doctorRepository)
+              ..add(LoadHomeEvent()),
+          ),
+        ],
+        child: MaterialApp(
+          title: 'Doctor Booking Application',
+          theme: const AppTheme().themeData,
+          home: const HomeScreen(),
+        ),
+      ),
     );
   }
 }
