@@ -1,4 +1,5 @@
 import 'package:doctor_app/state/home/_bloc.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,6 +22,7 @@ class AppScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider.value(value: doctorRepository),
@@ -34,6 +36,7 @@ class AppScreen extends StatelessWidget {
           ),
         ],
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'Doctor Booking Application',
           theme: const AppTheme().themeData,
           home: const HomeScreen(),
