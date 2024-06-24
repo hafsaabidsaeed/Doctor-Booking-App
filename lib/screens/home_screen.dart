@@ -2,10 +2,11 @@ import 'package:doctor_app/shared/widgets/avatars/circle_avatar_with_text_label.
 import 'package:doctor_app/shared/widgets/cards/appointment_preview_card.dart';
 import 'package:doctor_app/shared/widgets/titles/section_title.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
-
 import '../shared/widgets/bottom_nav_bars/main_nav_bar.dart';
 import '../shared/widgets/list_tiles/doctor_list_tile.dart';
+import '../state/home/_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -44,7 +45,7 @@ class HomeView extends StatelessWidget {
               height: 4,
             ),
             Text(
-              'Massimo D',
+              'Hafsa Abid',
               style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(
@@ -60,7 +61,7 @@ class HomeView extends StatelessWidget {
                   width: 4,
                 ),
                 Text(
-                  'Dubai, UAE',
+                  'Lahore, Pakistan',
                   style: textTheme.bodySmall!
                       .copyWith(color: colorScheme.secondary),
                 ),
@@ -109,20 +110,31 @@ class HomeView extends StatelessWidget {
         ),
       ),
 
-      body: const SingleChildScrollView(
-        padding: EdgeInsets.all(8),
-        child: Column(
-          children: [
-            //We will Display all the doctors categories here
-            _DoctorCategories(),
-            SizedBox(height: 24,),
-            _MySchedule(),
-            SizedBox(height: 24,),
-            _NearbyDoctors(),
-          ],
-        ),
+      body: BlocBuilder<HomeBloc, HomeState>(
+        builder: (context, state) {
+          if (state.status == HomeStatus.loading ||
+              state.status == HomeStatus.initial) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (state.status == HomeStatus.loaded) {
+            return const SingleChildScrollView(
+              padding: EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  _DoctorCategories(),
+                  SizedBox(height: 24.0),
+                  _MySchedule(),
+                  SizedBox(height: 24.0),
+                  _NearbyDoctors(),
+                ],
+              ),
+            );
+          } else {
+            return const Center(child: Text('Error loading data'));
+          }
+        },
       ),
-      bottomNavigationBar:const MainNavBar(),
+      bottomNavigationBar: const MainNavBar(),
     );
   }
 }
